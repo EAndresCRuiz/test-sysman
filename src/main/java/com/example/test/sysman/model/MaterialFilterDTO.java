@@ -1,5 +1,7 @@
 package com.example.test.sysman.model;
 
+import java.time.LocalDate;
+
 /**
  * DTO para encapsular los filtros de búsqueda de materiales.
  */
@@ -12,7 +14,7 @@ public class MaterialFilterDTO {
     private String tipo;
 
     /** Fecha mínima de compra. */
-    private String fechaCompraDesde;
+    private LocalDate fechaCompra;
 
     /** ID de la ciudad asociada. */
     private Integer ciudadId;
@@ -34,12 +36,12 @@ public class MaterialFilterDTO {
         this.tipo = tipo;
     }
 
-    public String getFechaCompraDesde() {
-        return fechaCompraDesde;
+    public LocalDate getFechaCompra() {
+        return fechaCompra;
     }
 
-    public void setFechaCompraDesde(String fechaCompraDesde) {
-        this.fechaCompraDesde = fechaCompraDesde;
+    public void setFechaCompra(LocalDate fechaCompra) {
+        this.fechaCompra = fechaCompra;
     }
 
     public Integer getCiudadId() {
@@ -50,4 +52,3 @@ public class MaterialFilterDTO {
         this.ciudadId = ciudadId;
     }
 }
-

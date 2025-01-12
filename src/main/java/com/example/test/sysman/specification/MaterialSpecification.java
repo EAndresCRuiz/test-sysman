@@ -34,9 +34,11 @@ public class MaterialSpecification {
 				predicates.add(criteriaBuilder.equal(root.get("tipo"), filter.getTipo()));
 			}
 
-			if (filter.getFechaCompraDesde() != null) {
-				predicates.add(
-						criteriaBuilder.greaterThanOrEqualTo(root.get("fechaCompra"), filter.getFechaCompraDesde()));
+			if (filter.getFechaCompra() != null) {
+			    predicates.add(criteriaBuilder.equal(
+			        criteriaBuilder.function("date", java.sql.Date.class, root.get("fechaCompra")),
+			        java.sql.Date.valueOf(filter.getFechaCompra())
+			    ));
 			}
 
 			if (filter.getCiudadId() != null) {
