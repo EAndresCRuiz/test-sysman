@@ -9,6 +9,7 @@ import com.example.test.sysman.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,47 @@ public class MaterialServiceImpl implements MaterialService {
     @Override
     public List<MaterialDTO> getAllMaterials() {
         return materialRepository.findAll().stream()
+                .map(materialMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MaterialDTO> getMaterialsByType(String tipo) {
+        return materialRepository.findByTipo(tipo).stream()
+                .map(materialMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MaterialDTO> getMaterialsByPurchaseDate(LocalDate fechaCompra) {
+        return materialRepository.findByFechaCompra(fechaCompra).stream()
+                .map(materialMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MaterialDTO> getMaterialsByPurchaseDateRange(LocalDate startDate, LocalDate endDate) {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("La fecha inicial no puede ser posterior a la fecha final");
+        }
+        return materialRepository.findByFechaCompraBetween(startDate, endDate).stream()
+                .map(materialMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MaterialDTO> getMaterialsByCity(Long ciudadId) {
+        return materialRepository.findByCiudadId(ciudadId).stream()
+                .map(materialMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+    
+    @Override
+    public List<MaterialDTO> getMaterialsByName(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        return materialRepository.findByNombreContainingIgnoreCase(keyword).stream()
                 .map(materialMapper::toDTO)
                 .collect(Collectors.toList());
     }
