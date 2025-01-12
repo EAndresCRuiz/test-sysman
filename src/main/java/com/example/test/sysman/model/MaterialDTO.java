@@ -8,29 +8,31 @@ import java.time.LocalDate;
 
 public class MaterialDTO {
 
-    @NotBlank
+	@NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
 
+    @NotBlank(message = "La descripción no puede estar vacía")
     private String descripcion;
 
-    @NotNull
+    @NotBlank(message = "El tipo no puede estar vacío")
     private String tipo;
 
-    @NotNull
+    @NotNull(message = "El precio no puede ser nulo")
     private BigDecimal precio;
-
-    @NotNull
+    
     @PastOrPresent
+    @NotNull(message = "La fecha de compra no puede ser nula")
     private LocalDate fechaCompra;
 
     @FutureOrPresent
+    @NotNull(message = "La fecha de venta no puede ser nula")
     private LocalDate fechaVenta;
 
     @NotNull
     private EstadoMaterial estado;
 
-    @NotBlank
-    private String ciudadNombre;
+    @NotNull(message = "La ciudad no puede ser nula")
+    private Long ciudadId;
 
 	public String getNombre() {
 		return nombre;
@@ -88,12 +90,12 @@ public class MaterialDTO {
 		this.estado = estado;
 	}
 
-	public String getCiudadNombre() {
-		return ciudadNombre;
+	public Long getCiudadId() {
+		return ciudadId;
 	}
 
-	public void setCiudadNombre(String ciudadNombre) {
-		this.ciudadNombre = ciudadNombre;
+	public void setCiudadId(Long ciudadId) {
+		this.ciudadId = ciudadId;
 	}
 
 }

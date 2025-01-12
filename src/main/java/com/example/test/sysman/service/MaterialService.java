@@ -1,9 +1,11 @@
 package com.example.test.sysman.service;
 
-import com.example.test.sysman.entity.Material;
+import com.example.test.sysman.model.MaterialDTO;
 
 import java.util.List;
 
 public interface MaterialService {
-    List<Material> getAllMaterials();
+    List<MaterialDTO> getAllMaterials();
+    MaterialDTO createMaterial(MaterialDTO materialDTO);
+    MaterialDTO updateMaterial(Long id, MaterialDTO materialDTO);
 }

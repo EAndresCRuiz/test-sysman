@@ -2,11 +2,15 @@ package com.example.test.sysman.mapper;
 
 import com.example.test.sysman.entity.Material;
 import com.example.test.sysman.model.MaterialDTO;
+
+import org.springframework.stereotype.Component;
+
 import com.example.test.sysman.entity.Ciudad;
 
+@Component
 public class MaterialMapper {
 
-    public static Material toEntity(MaterialDTO dto, Ciudad ciudad) {
+    public Material toEntity(MaterialDTO dto) {
         Material material = new Material();
         material.setNombre(dto.getNombre());
         material.setDescripcion(dto.getDescripcion());
@@ -15,11 +19,12 @@ public class MaterialMapper {
         material.setFechaCompra(dto.getFechaCompra());
         material.setFechaVenta(dto.getFechaVenta());
         material.setEstado(dto.getEstado());
-        material.setCiudad(ciudad);
+        material.setCiudad(new Ciudad());
+        material.getCiudad().setId(dto.getCiudadId());
         return material;
     }
 
-    public static MaterialDTO toDTO(Material material) {
+    public MaterialDTO toDTO(Material material) {
         MaterialDTO dto = new MaterialDTO();
         dto.setNombre(material.getNombre());
         dto.setDescripcion(material.getDescripcion());
@@ -28,7 +33,7 @@ public class MaterialMapper {
         dto.setFechaCompra(material.getFechaCompra());
         dto.setFechaVenta(material.getFechaVenta());
         dto.setEstado(material.getEstado());
-        dto.setCiudadNombre(material.getCiudad().getNombre());
+        dto.setCiudadId(material.getCiudad().getId());
         return dto;
     }
 }

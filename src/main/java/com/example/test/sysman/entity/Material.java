@@ -11,34 +11,34 @@ import java.time.LocalDate;
 
 @Entity
 public class Material {
-    
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @NotBlank
-    private String nombre;
+	@NotBlank
+	private String nombre;
 
-    private String descripcion;
+	private String descripcion;
 
-    private String tipo;
+	private String tipo;
 
-    @NotNull
-    private BigDecimal precio;
+	@NotNull
+	private BigDecimal precio;
 
-    @NotNull
-    @PastOrPresent
-    private LocalDate fechaCompra;
+	@NotNull
+	@PastOrPresent
+	private LocalDate fechaCompra;
 
-    @FutureOrPresent
-    private LocalDate fechaVenta;
+	@FutureOrPresent
+	private LocalDate fechaVenta;
 
-    @Enumerated(EnumType.STRING)
-    private EstadoMaterial estado;
+	@Enumerated(EnumType.STRING)
+	private EstadoMaterial estado;
 
-    @ManyToOne
-    @JoinColumn(name = "ciudad_codigo", nullable = false)
-    private Ciudad ciudad;
+	@ManyToOne
+	@JoinColumn(name = "ciudad_id", nullable = false)
+	private Ciudad ciudad;
 
 	public Long getId() {
 		return id;
@@ -110,7 +110,6 @@ public class Material {
 
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
-	}    
-    
-}
+	}
 
+}
