@@ -1,6 +1,7 @@
 package com.example.test.sysman.controller;
 
 import com.example.test.sysman.model.MaterialDTO;
+import com.example.test.sysman.model.MaterialFilterDTO;
 import com.example.test.sysman.service.MaterialService;
 
 import jakarta.validation.Valid;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de materiales.
+ */
 @RestController
 @RequestMapping("/api/materiales")
 @Validated
@@ -20,6 +24,11 @@ public class MaterialController {
 
     private final MaterialService materialService;
 
+    /**
+     * Constructor para inyección de dependencias.
+     *
+     * @param materialService Servicio de materiales.
+     */
     @Autowired
     public MaterialController(MaterialService materialService) {
         this.materialService = materialService;
@@ -65,6 +74,17 @@ public class MaterialController {
     @GetMapping("/by-name")
     public ResponseEntity<List<MaterialDTO>> getMaterialsByName(@RequestParam String keyword) {
         return ResponseEntity.ok(materialService.getMaterialsByName(keyword));
+    }
+    
+    /**
+     * Obtiene una lista de materiales filtrados según los parámetros enviados.
+     *
+     * @param filter DTO con los filtros aplicables.
+     * @return Lista de materiales que cumplen los criterios.
+     */
+    @GetMapping("/filter")
+    public List<MaterialDTO> getMaterials(MaterialFilterDTO filter) {
+        return materialService.getMaterialsByFilters(filter);
     }
 
     @PostMapping

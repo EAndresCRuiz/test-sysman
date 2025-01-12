@@ -4,15 +4,22 @@ import com.example.test.sysman.entity.Ciudad;
 import com.example.test.sysman.entity.Material;
 import com.example.test.sysman.mapper.MaterialMapper;
 import com.example.test.sysman.model.MaterialDTO;
+import com.example.test.sysman.model.MaterialFilterDTO;
 import com.example.test.sysman.repository.MaterialRepository;
 import com.example.test.sysman.service.MaterialService;
+import com.example.test.sysman.specification.MaterialSpecification;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la gestión de materiales.
+ */
 @Service
 public class MaterialServiceImpl implements MaterialService {
 
@@ -71,6 +78,19 @@ public class MaterialServiceImpl implements MaterialService {
         return materialRepository.findByNombreContainingIgnoreCase(keyword).stream()
                 .map(materialMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+    
+    /**
+     * Obtiene una lista de materiales según los filtros aplicados.
+     *
+     * @param filter DTO con los criterios de filtro.
+     * @return Lista de materiales que cumplen los criterios.
+     */
+    public List<MaterialDTO> getMaterialsByFilters(MaterialFilterDTO filter) {
+        return materialRepository.findAll(MaterialSpecification.getMaterialsByFilters(filter), Sort.by("nombre").ascending())
+        		.stream()
+        		.map(materialMapper::toDTO)
+        		.collect(Collectors.toList());
     }
     
     @Override

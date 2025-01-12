@@ -2,6 +2,7 @@ package com.example.test.sysman.repository;
 
 import com.example.test.sysman.entity.Material;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.List;
  * Repositorio para gestionar operaciones CRUD y consultas personalizadas sobre la entidad {@link Material}.
  */
 @Repository
-public interface MaterialRepository extends JpaRepository<Material, Long> {
+public interface MaterialRepository extends JpaRepository<Material, Long>, JpaSpecificationExecutor<Material> {
 
     /**
      * Encuentra materiales por su tipo.
