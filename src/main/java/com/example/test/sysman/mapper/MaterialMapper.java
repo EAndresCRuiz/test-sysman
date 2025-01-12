@@ -12,6 +12,7 @@ public class MaterialMapper {
 
     public Material toEntity(MaterialDTO dto) {
         Material material = new Material();
+        material.setId(dto.getId());
         material.setNombre(dto.getNombre());
         material.setDescripcion(dto.getDescripcion());
         material.setTipo(dto.getTipo());
@@ -26,6 +27,7 @@ public class MaterialMapper {
 
     public MaterialDTO toDTO(Material material) {
         MaterialDTO dto = new MaterialDTO();
+        dto.setId(material.getId());
         dto.setNombre(material.getNombre());
         dto.setDescripcion(material.getDescripcion());
         dto.setTipo(material.getTipo());

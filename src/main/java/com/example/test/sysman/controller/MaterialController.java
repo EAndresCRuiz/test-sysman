@@ -45,6 +45,12 @@ public class MaterialController {
         return ResponseEntity.ok(materiales);
     }
     
+    @GetMapping("/{id}")
+    public ResponseEntity<MaterialDTO> getMaterialById(@PathVariable Long id) {
+        MaterialDTO material = materialService.getMaterialById(id);
+        return ResponseEntity.ok(material);
+    }
+    
     @GetMapping("/by-type")
     public ResponseEntity<List<MaterialDTO>> getMaterialsByType(@RequestParam String tipo) {
         return ResponseEntity.ok(materialService.getMaterialsByType(tipo));

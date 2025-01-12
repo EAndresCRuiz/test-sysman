@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface MaterialService {
     List<MaterialDTO> getAllMaterials();
+    MaterialDTO getMaterialById(Long id);
     List<MaterialDTO> getMaterialsByType(String tipo);
     List<MaterialDTO> getMaterialsByPurchaseDate(LocalDate fechaCompra);
     List<MaterialDTO> getMaterialsByPurchaseDateRange(LocalDate startDate, LocalDate endDate);

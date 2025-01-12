@@ -38,6 +38,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
     }
 
+    /**
+     * Maneja excepciones de recursos no encontrados.
+     *
+     * @param ex Excepción de recurso no encontrado.
+     * @return Respuesta con el mensaje de error.
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+    
     private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String error, String message) {
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now());

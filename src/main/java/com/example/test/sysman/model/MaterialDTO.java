@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class MaterialDTO {
+	
+	private Long id;
 
 	@NotBlank(message = "El nombre no puede estar vacío")
     private String nombre;
@@ -33,6 +35,15 @@ public class MaterialDTO {
 
     @NotNull(message = "La ciudad no puede ser nula")
     private Long ciudadId;
+    
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return nombre;

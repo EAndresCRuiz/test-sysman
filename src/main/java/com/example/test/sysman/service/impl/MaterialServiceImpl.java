@@ -2,6 +2,7 @@ package com.example.test.sysman.service.impl;
 
 import com.example.test.sysman.entity.Ciudad;
 import com.example.test.sysman.entity.Material;
+import com.example.test.sysman.exceptions.ResourceNotFoundException;
 import com.example.test.sysman.mapper.MaterialMapper;
 import com.example.test.sysman.model.MaterialDTO;
 import com.example.test.sysman.model.MaterialFilterDTO;
@@ -38,6 +39,21 @@ public class MaterialServiceImpl implements MaterialService {
                 .map(materialMapper::toDTO)
                 .collect(Collectors.toList());
     }
+    
+    /**
+     * Obtiene un material por su ID.
+     *
+     * @param id ID del material.
+     * @return DTO del material.
+     */
+    @Override
+    public MaterialDTO getMaterialById(Long id) {
+    	Material material = materialRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Material no encontrado con ID: " + id));
+
+        return materialMapper.toDTO(material);
+    }
+
 
     @Override
     public List<MaterialDTO> getMaterialsByType(String tipo) {
