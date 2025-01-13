@@ -36,6 +36,7 @@ public class MaterialDTO {
     @NotNull(message = "La ciudad no puede ser nula")
     private Long ciudadId;
     
+    private CiudadDTO ciudad;
 
 	public Long getId() {
 		return id;
@@ -108,5 +109,13 @@ public class MaterialDTO {
 	public void setCiudadId(Long ciudadId) {
 		this.ciudadId = ciudadId;
 	}
+	
+	public CiudadDTO getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(CiudadDTO ciudad) {
+        this.ciudad = ciudad;
+    }
 
 }

@@ -11,6 +11,9 @@ public class CiudadDTO {
         this.id = id;
         this.nombre = nombre;
     }
+    
+    public CiudadDTO() {
+    }
 
     public Long getId() {
         return id;
